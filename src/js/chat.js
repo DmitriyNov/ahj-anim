@@ -3,8 +3,8 @@ export default class Chat {
 
   render(container) {
     const chatWidget = document.createElement("div");
-      chatWidget.classList.add("widget-chat-container");
-      chatWidget.innerHTML = `
+    chatWidget.classList.add("widget-chat-container");
+    chatWidget.innerHTML = `
           <div class="call-button"></div>
           <div class="chat-container kill">
             <h3 class="chat-hedder">Напишите нам</h3>
@@ -15,8 +15,8 @@ export default class Chat {
             </form>
           </div>
         `;
-        container.appendChild(chatWidget);
-  };
+    container.appendChild(chatWidget);
+  }
 
   showChat() {
     const button = document.querySelector(".call-button");
@@ -44,8 +44,8 @@ export default class Chat {
       button.classList.toggle("hidden");
       setTimeout(() => {
         button.classList.add("kill");
-      }, "200");  //Как по мне, костыли какие-то дикие) Наверное через animation можно было сделать лучше
-    }
+      }, "200"); //Как по мне, костыли какие-то дикие) Наверное через animation можно было сделать лучше
+    };
 
     const closeListener = function () {
       chat.classList.toggle("visible");
@@ -54,7 +54,7 @@ export default class Chat {
       }, "100");
       button.classList.remove("kill");
       button.classList.toggle("hidden");
-    }
+    };
 
     button.addEventListener("mouseover", overListener);
     button.addEventListener("click", clickListener);
@@ -62,5 +62,5 @@ export default class Chat {
     chatSubmit.addEventListener("click", (event) => {
       event.preventDefault();
     });
-  };
-};
+  }
+}
