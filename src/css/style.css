@@ -16,7 +16,7 @@ p {
   margin-top: 200px;
 }
 
-.collapse-container {
+.collapse-widget-container {
   width: 70%;
   min-width: 400px;
   max-width: 600px;
@@ -28,16 +28,30 @@ p {
   cursor: pointer;
 }
 
-.collapse-content {
+.collapse-container {
+  box-sizing: border-box;
   overflow: hidden;
-  transition: all 1s linear;
 }
 
-.collapse-content * {
+.collapse-content {
+  height: inherit;
   padding: 10px;
   border: 1px solid rgb(110, 110, 110);
   border-radius: 5px;
-  display: block;
+}
+
+.collapse {
+  animation-name: collapse;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.collapse-reverse {
+  animation-name: show;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: backwards;
 }
 
 .call-button {
@@ -50,12 +64,16 @@ p {
   right: 50px;
 }
 
-.call-button:hover {
-  animation-name: pulse;
-  animation-delay: 100ms;
-  animation-duration: 100ms;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
+.pulse {
+  transition: all 100ms;
+  transition-delay: 100ms;
+  transform: scale(1.2);
+}
+
+.pulse-reverse {
+  transition: all 100ms;
+  transition-delay: 100ms;
+  transform: scale(1);
 }
 
 .chat-container {
@@ -68,6 +86,9 @@ p {
   position: fixed;
   bottom: 75px;
   right: 75px;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 100ms;
 }
 
 .chat-exit {
@@ -94,11 +115,34 @@ p {
   border-radius: 8px;
 }
 
-@keyframes pulse {
+.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.hidden {
+  transition: all 200ms;
+  opacity: 0;
+}
+
+.kill {
+  display: none;
+}
+
+@keyframes collapse {
   0% {
-    transform: scale(1, 1);
+    max-height: 100%;
   }
   100% {
-    transform: scale(1.2, 1.2);
+    max-height: 0;
+  }
+}
+
+@keyframes show {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 100%;
   }
 }

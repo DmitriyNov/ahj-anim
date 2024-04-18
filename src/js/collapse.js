@@ -3,32 +3,35 @@ export default class Collapse {
   
     render(container) {
         const collapseWidget = document.createElement("div");
-        collapseWidget.classList.add("collapse-container");
+        collapseWidget.classList.add("collapse-widget-container");
         collapseWidget.innerHTML = `
             <button class="collapse-button">Collapse</button>
-            <div class="collapse-content">
-                <p class="collapse-text">
-                В рамках реализации большого портала вам необходимо сделать виджет "collapsible"-контейнеров, который может разворачиваться и сворачиваться.
-                </p>
+            <div class="collapse-container">
+                <div class="collapse-content">
+                    <p class="collapse-text">
+                    В рамках реализации большого портала вам необходимо сделать виджет "collapsible"-контейнеров, который может разворачиваться и сворачиваться.
+                    </p>
+                </div>
             </div>
         `;
         container.appendChild(collapseWidget);
     };
   
     collapse() {
-        const height = document.querySelector(".collapse-container").clientHeight;
         const button = document.querySelector(".collapse-button");
-        const content = document.querySelector(".collapse-content");
+        const container = document.querySelector(".collapse-container");
         const listener = function () {
-            content.classList.toggle("collapse");
-            if (content.classList.contains("collapse")) {
-                content.style.maxHeight = "0px";
+            if (container.classList.contains("collapse")) {
+                container.classList.remove("collapse");
+                container.classList.add("collapse-reverse");
+            } else if (container.classList.contains("collapse-reverse")) {
+                container.classList.remove("collapse-reverse");
+                container.classList.add("collapse");
             } else {
-                content.style.maxHeight = `${height}px`;
+                container.classList.add("collapse");
             }
         };
         button.addEventListener("click", listener);
-
-        //Решение подсмотрел на Хабр Q&A, сам не смог подобрать нормально стили, чтобы всё правильно работало. Однако всё равно есть проблема с тем, что при первом надатии на кнопку переход осуществялется мнговенно. Я не смог разобраться, в чём причина
     };
   };
+  
